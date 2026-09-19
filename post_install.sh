@@ -4,18 +4,28 @@ echo "============================================="
 echo " Starting Omarchy Post-Installation Setup   "
 echo "============================================="
 
+# 0. Создание системного снимка (Snapshot) перед изменениями
+echo "--> Creating a system snapshot..."
+if command -v timeshift &> /dev/null; then
+    sudo timeshift --create --comments "Before Omarchy Auto-Install"
+elif command -v snapper &> /dev/null; then
+    sudo snapper create --description "Before Omarchy Auto-Install"
+else
+    echo "--> Warning: No snapshot tool found (timeshift/snapper). Skipping..."
+fi
+
 # 1. Update the system package database
 echo "--> Updating system..."
 sudo pacman -Syu --noconfirm
 
 # 2. Install Firefox and your preferred tools
 echo "--> Installing Firefox and essential apps..."
-sudo pacman -S --noconfirm firefox git steam nano htop qbittorrent base-devel 
+sudo pacman -S --noconfirm firefox git steam nano htop qbittorrent base-devel fastfetch
 
 # 2.1 Install Custom AUR Packages via yay
 echo "--> Installing apps from the AUR (Vesktop, Happ, Prism)..."
 # Using -bin builds for complex apps ensures fast precompiled setups!
-yay -S --noconfirm vesktop-bin happ-desktop-bin prismlauncher
+yay -S --noconfirm vesktop-bin happ-desktop-bin prismlauncher spotify
 
 
 
