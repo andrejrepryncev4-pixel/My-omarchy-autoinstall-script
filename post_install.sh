@@ -28,12 +28,14 @@ echo "--> Hardening and spinning up libvirtd and docker daemons..."
 sudo systemctl enable --now libvirtd
 sudo systemctl enable --now docker
 
- 2.2 Установка зависимостей для правильной работы тем Qylock (Qt6 & GStreamer)
-echo "--> Installing Qylock engine dependencies (Qt6, GStreamer, ffmpeg)..."
+# 2.2 ADDED: All required Qylock, Qt5, Qt6, and GStreamer dependencies
+echo "--> Installing login screen theme dependencies..."
 sudo pacman -S --noconfirm \
-    sddm qt6-declarative qt6-5compat qt6-svg \
+    sddm perl \
+    qt5-declarative qt5-graphicaleffects qt5-quickcontrols2 qt5-multimedia \
     qt6-multimedia qt6-multimedia-ffmpeg \
     gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
+
 
 # 3. Интерактивная установка экрана входа Qylock
 echo "--> Fetching Qylock themes from GitHub..."
