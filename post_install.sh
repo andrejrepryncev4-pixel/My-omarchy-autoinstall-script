@@ -37,30 +37,6 @@ sudo pacman -S --noconfirm \
     gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
 
 
-# 3. Интерактивная установка экрана входа Qylock
-echo "--> Fetching Qylock themes from GitHub..."
-cd /tmp || exit
-rm -rf qylock
-git clone https://github.com/Darkkal44/qylock.git
-cd qylock || exit
-chmod +x sddm.sh
-
-echo "----------------------------------------------------"
-echo " [!] LAUNCHING QYLOCK INTERACTIVE INSTALLER"
-echo "  1. Choose 'Qt6' when prompted."
-echo "  2. Use arrow keys and SPACE to select 'winter'."
-echo "  3. Press Enter, enter your password, and choose 'Yes' to activate."
-echo "----------------------------------------------------"
-read -p "Press [ENTER] to start the Qylock installer..."
-
-# Запуск скрипта автора в интерактивном режиме
-./sddm.sh
-
-echo "----------------------------------------------------"
-echo " [?] PASSTHROUGH CHECK"
-echo " Make sure the Qylock installation finished successfully."
-echo "----------------------------------------------------"
-read -p "Press [ENTER] to continue with restoration of your personal configurations..."
 
 # Inject your local session account permissions securely to avoid sudo rules
 sudo usermod -aG libvirt $(whoami)
