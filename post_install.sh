@@ -41,7 +41,7 @@ sudo pacman -S --noconfirm \
 echo "--> Fetching Qylock themes from GitHub..."
 cd /tmp || exit
 rm -rf qylock
-git clone https://github.com
+git clone https://github.com/Darkkal44/qylock.git
 cd qylock || exit
 chmod +x sddm.sh
 
