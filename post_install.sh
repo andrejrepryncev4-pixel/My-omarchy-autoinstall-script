@@ -20,9 +20,19 @@ sudo pacman -Syu --noconfirm
 
 # 2. Install Firefox and your preferred tools
 echo "--> Installing Firefox and essential apps..."
-sudo pacman -S --noconfirm firefox git steam nano htop qbittorrent base-devel fastfetch
+sudo pacman -S --noconfirm firefox git steam nano htop qbittorrent base-devel fastfetch virt-manager qemu-desktop libvirt dnsmasq iptables-nft \
+    docker docker-compose
 
-# 2.1 Install Custom AUR Packages via yay
+# 2.1 Activate background virtual machines and containers services
+echo "--> Hardening and spinning up libvirtd and docker daemons..."
+sudo systemctl enable --now libvirtd
+sudo systemctl enable --now docker
+
+# Inject your local session account permissions securely to avoid sudo rules
+sudo usermod -aG libvirt $(whoami)
+sudo usermod -aG docker $(whoami)
+
+# 2.2 Install Custom AUR Packages via yay
 echo "--> Installing apps from the AUR (Vesktop, Happ, Prism)..."
 # Using -bin builds for complex apps ensures fast precompiled setups!
 yay -S --noconfirm vesktop-bin happ-desktop-bin prismlauncher spotify
